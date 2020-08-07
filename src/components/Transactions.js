@@ -18,18 +18,22 @@ export default function Transactions({
   // Sort by month based on transaction.age
   transactions.map((transaction) => {
     transaction.age = calculateAge(transaction.date)
+    console.log(`${transaction.date}: ${transaction.age}`)
     // Actual sorting
-    if (transaction.age <= 30) {
+    if (transaction.age < 0) {
       one.push(transaction)
       one.sort((a, b) => a.age - b.age)
+      return one
     }
-    if (transaction.age > 30 && transaction.age < 61) {
+    if (transaction.age === 0) {
       two.push(transaction)
       two.sort((a, b) => a.age - b.age)
+      return two
     }
-    if (transaction.age > 60 && transaction.age <= 89) {
+    if (transaction.age === 1) {
       three.push(transaction)
       three.sort((a, b) => a.age - b.age)
+      return three
     }
   })
 

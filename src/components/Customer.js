@@ -35,9 +35,9 @@ export default function Customer({ name, email, transactions }) {
     // formate transaction date
     const transactionDate = moment(date, 'YYYY-MM-DD')
     // get current time
-    const now = moment()
+    const now = moment().startOf('M')
     // calculate date
-    return Math.floor(moment.duration(now.diff(transactionDate)).asDays())
+    return Math.floor(moment.duration(now.diff(transactionDate)).asMonths())
   }
 
   return (
