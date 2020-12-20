@@ -11,15 +11,15 @@ export default function Transactions({
   const one = []
   const two = []
   const three = []
-  const [lessThanThree] = useState(three)
-  const [lessThanTwo] = useState(two)
-  const [lessThanOne] = useState(one)
+  const [ninetyDays] = useState(three)
+  const [sixtyDays] = useState(two)
+  const [thirtyDays] = useState(one)
+  const timePeriod = [thirtyDays, sixtyDays, ninetyDays]
 
   // Sort by month based on transaction.age
   transactions.map((transaction) => {
     transaction.age = calculateAge(transaction.date)
-    console.log(`${transaction.date}: ${transaction.age}`)
-    // Actual sorting
+
     if (transaction.age < 0) {
       one.push(transaction)
       one.sort((a, b) => a.age - b.age)
@@ -39,24 +39,15 @@ export default function Transactions({
 
   return (
     <div className='w-full'>
+    {timePeriod.map( (period, i) => (
       <MonthlyTransactions
         month={moment().format('MMMM')}
-        monthlyTransactions={lessThanOne}
+        key={i}
+        monthlyTransactions={period}
         calculateReward={calculateReward}
         calculateTotalRewards={calculateTotalRewards}
       />
-      <MonthlyTransactions
-        month={moment().subtract(1, 'months').format('MMMM')}
-        monthlyTransactions={lessThanTwo}
-        calculateReward={calculateReward}
-        calculateTotalRewards={calculateTotalRewards}
-      />
-      <MonthlyTransactions
-        month={moment().subtract(2, 'months').format('MMMM')}
-        monthlyTransactions={lessThanThree}
-        calculateReward={calculateReward}
-        calculateTotalRewards={calculateTotalRewards}
-      />
+    ))}
     </div>
   )
 }

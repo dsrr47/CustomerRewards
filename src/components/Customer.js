@@ -23,20 +23,14 @@ export default function Customer({ name, email, transactions }) {
   // Calculate total Rewards
   const calculateTotalRewards = (arr, fn) => {
     let rewards = []
-    // map rewards into array
     arr.map((num) => rewards.push(fn(num.amount)))
-
-    //reduce array into single value
     return rewards.reduce((acc, num) => acc + num, 0)
   }
 
   // Calculate transaction age
   const calculateAge = (date) => {
-    // formate transaction date
     const transactionDate = moment(date, 'YYYY-MM-DD')
-    // get current time
     const now = moment().startOf('M')
-    // calculate date
     return Math.floor(moment.duration(now.diff(transactionDate)).asMonths())
   }
 
